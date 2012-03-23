@@ -2,11 +2,13 @@ require 'make_cards'
 require 'fakefs/spec_helpers'
 
 describe MakeCards do
-  #include FakeFS::SpecHelpers
+  include FakeFS::SpecHelpers
 
   let(:file_reader) { mock }
   let(:file_writer) { mock }
   let(:m) { MakeCards.new( file_reader, file_writer )}
+
+  before { FakeFS::FileSystem.add( File.expand_path"~/Desktop/ForAnkiImport/" ) }
 
   context "a file with one entry" do
 
@@ -28,10 +30,9 @@ describe MakeCards do
       m.make
     end
 
-    xit "creates one file per book" do  #TODO: find the bug with fakefs that won't let me open an existing file
+    xit "creates one file per book" do  #TODO: make this a cucumber feature (end-to-end)
       m.make
-#Dir.exist?( File.expand_path("~/Desktop") ).should be_true
-#      File.exists?( File.expand_path(File.join("~/Desktop","This is the title of the Book.txt") ) ).should be_true
+      File.exists?( File.expand_path(File.join("~/Desktop","This is the title of the Book.txt") ) ).should be_true
     end
 
   end

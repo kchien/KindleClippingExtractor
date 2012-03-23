@@ -18,12 +18,6 @@ class MakeCards
       end
     end
 
-#    file=File.expand_path(File.join("~/Desktop",
-#                            "#{book_highlight.title}.txt"
-#                            ))
-#    File.open(file, "a") do |f|
-#      f.puts "..."
-#    end
   end  
 
   EXPORT_DIRECTORY = File.expand_path "~/Desktop/ForAnkiImport/"

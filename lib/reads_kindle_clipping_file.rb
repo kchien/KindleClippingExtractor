@@ -11,16 +11,28 @@ class ReadsKindleClippingFile
 
     @file_reader.open(@filename, "r") do |f|
       b = BookNote.new
-      while ( line = f.gets ) do
-        if (line =~ /^={6}/ )
-          (line=f.gets).nil?  ? next : b.title=line.strip 
-          (line=f.gets).nil?  ? next : b.location=line.strip
-          (line=f.gets).nil?  ? next : b.note=line.strip
+      while ( line=next_blank_line_from_file(f) ) do
+           b.title = line
+#           puts "just set title: #{b.title}"
+           
+          b.location = line=next_blank_line_from_file(f)
+#          puts "just set loc: #{b.location}"
 
-          book_info << b
-        end
+          f.gets.strip #blank line??
+
+          b.note = line=next_blank_line_from_file(f)
+#          puts "just set note: #{b.note}"
+
+          line=f.gets.strip
+#          puts "just read #{line}"
+          book_info << b if line =~ /^={6}/
       end
     end
     book_info
+  end
+
+  def next_blank_line_from_file(f) 
+    line = f.gets 
+    line.nil? ? nil : line.strip
   end
 end

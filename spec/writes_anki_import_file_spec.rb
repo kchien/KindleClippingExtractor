@@ -5,10 +5,9 @@ describe WritesAnkiImportFile do
 
   describe "#write_to" do
     it "adds one Anki fact to the specified file" do
-      File.should_receive(:open).with("foo_bar.txt", "a")
-      subject.write_to("foo_bar.txt")
+      File.should_receive(:open).with("foo_bar.txt", "a").and_yield(File)
+      subject.write_to("foo_bar.txt") { |f| f.should == File }
     end
-
   end
 end
 
