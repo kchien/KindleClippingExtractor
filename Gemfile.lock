@@ -3,6 +3,7 @@ GEM
   specs:
     diff-lcs (1.1.3)
     fakefs (0.4.0)
+    kindleclippings (1.3.0)
     rspec (2.8.0)
       rspec-core (~> 2.8.0)
       rspec-expectations (~> 2.8.0)
@@ -17,4 +18,5 @@ PLATFORMS
 
 DEPENDENCIES
   fakefs
+  kindleclippings
   rspec
