@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/kchien/kindleclippings.git
-  revision: 9e0a6881f12ffd954be854af9ccf7c578f53e725
+  revision: 9aaafb60ce7779cbef22f0dabb3f3583e1c16604
   specs:
     kindleclippings (1.3.1)
 
