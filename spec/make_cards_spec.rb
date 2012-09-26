@@ -21,13 +21,7 @@ describe MakeCards do
       m.make
     end
 
-    xit "creates one file per book" do  #TODO: make this a cucumber feature (end-to-end)
-      m.make
-      File.exists?( File.expand_path(File.join("~/Desktop","This is the title of the Book.txt") ) ).should be_true
-    end
-
   end
-
 
   context "a file with 3 entries" do
     let(:entry) { stub }
