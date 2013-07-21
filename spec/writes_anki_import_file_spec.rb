@@ -4,7 +4,7 @@ describe WritesAnkiImportFile do
   include FakeFS::SpecHelpers
  
   BOOK_TITLE = 'frog'
-  subject { described_class.new }
+  let(:writer) { described_class.new }
 
   let(:highlight) { stub(book_title: BOOK_TITLE,
                       content: 'it jumps',
@@ -18,14 +18,14 @@ describe WritesAnkiImportFile do
     context "given a highlight from a book titled '#{BOOK_TITLE}'" do
       it "writes the highlight to a file named '#{BOOK_TITLE}.txt'" do
          File.should_receive(:open).with(/#{BOOK_TITLE}.txt$/, 'a')
-         subject.write_out(highlight)
+         writer.write_out(highlight)
       end
 
       it "puts the content on the 'front' of the card" do
          file = stub
          File.should_receive(:open).with(/#{BOOK_TITLE}.txt$/, 'a').and_yield(file)
          file.should_receive(:puts).with(/^it jumps/)
-         subject.write_out(highlight)
+         writer.write_out(highlight)
       end
     end
 
