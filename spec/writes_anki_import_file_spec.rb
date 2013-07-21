@@ -11,10 +11,12 @@ describe WritesAnkiImportFile do
                       author: 'John Doe',
                       location: '- Highlight Loc. 62-63 | Added on Thursday, June 18, 2009, 07:39 PM') }
 
-  before { FakeFS::FileSystem.add( File.expand_path ENV['PWD'] ) }
-  before { FakeFS::FileSystem.add( File.expand_path "~/Desktop/" ) }
+  before do
+    FakeFS::FileSystem.add( File.expand_path ENV['PWD'] )
+    FakeFS::FileSystem.add( File.expand_path "~/Desktop/" )
+  end
 
-  describe "#write_out" do
+  describe "how it outputs a highlight as an Anki flashcard" do
     context "given a highlight from a book titled '#{BOOK_TITLE}'" do
       it "writes the highlight to a file named '#{BOOK_TITLE}.txt'" do
          File.should_receive(:open).with(/#{BOOK_TITLE}.txt$/, 'a')
