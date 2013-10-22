@@ -6,9 +6,9 @@ class WritesAnkiImportFile
   end
 
   def write_out(highlight)
-    FileUtils.mkdir_p(@output_dir) unless Dir.exists?(@output_dir)
+    FileUtils.mkdir_p(output_dir) unless Dir.exists?(output_dir)
 
-    anki_text_file = File.join(@output_dir, "#{highlight.book_title}.txt")
+    anki_text_file = File.join(output_dir, "#{highlight.book_title}.txt")
     File.open(anki_text_file, 'a') do |f|
       front = highlight.content
       back  = "#{highlight.book_title}|#{highlight.author}|#{highlight.location}"
@@ -17,4 +17,7 @@ class WritesAnkiImportFile
     end
       #book_title, author, type, location, content
   end
+
+  private
+  attr_reader :output_dir
 end

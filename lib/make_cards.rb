@@ -7,10 +7,12 @@ class MakeCards
   end
 
   def make
-    book_highlights = @file_parser.lines 
+    book_highlights = file_parser.lines
     book_highlights.each do |highlight|
-      @file_writer.write_out(highlight)
+      file_writer.write_out(highlight)
     end
   end  
 
+  private
+  attr_reader :file_parser, :file_writer
 end
