@@ -1,0 +1,3 @@
+module KindleExtractor
+  VERSION = "0.1"
+end
