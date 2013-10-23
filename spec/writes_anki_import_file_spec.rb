@@ -1,4 +1,5 @@
 require 'writes_anki_import_file'
+require 'fakefs/safe'
 
 describe WritesAnkiImportFile do
   include FakeFS::SpecHelpers
