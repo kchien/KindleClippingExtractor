@@ -1,5 +1,6 @@
 Kindle Clipping Extractor
 =========================
+[![Build Status](https://travis-ci.org/kchien/KindleClippingExtractor.png?branch=master)](https://travis-ci.org/kchien/KindleClippingExtractor)
 
 A quick script (in alpha status) that will read the Amazon Kindle clippings
 file and create files that you can import into [Anki](http://ankisrs.net/).
