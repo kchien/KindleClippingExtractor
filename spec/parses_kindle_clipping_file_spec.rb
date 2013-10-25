@@ -1,6 +1,6 @@
 require 'parses_kindle_clipping_file'
 
-describe ParsesKindleClippingFile do
+describe KindleExtractor::ParsesKindleClippingFile do
   describe "#lines" do 
     let(:parser) { stub }
     let(:reader) { described_class.new("foo_filename", parser) }
