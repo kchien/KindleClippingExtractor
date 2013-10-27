@@ -1,4 +1,4 @@
-require 'make_cards'
+require 'kindle_extractor/make_cards'
 require 'fakefs/spec_helpers'
 
 module KindleExtractor

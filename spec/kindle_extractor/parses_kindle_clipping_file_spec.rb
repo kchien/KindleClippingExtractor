@@ -1,4 +1,4 @@
-require 'parses_kindle_clipping_file'
+require 'kindle_extractor/parses_kindle_clipping_file'
 
 describe KindleExtractor::ParsesKindleClippingFile do
   describe "#lines" do 

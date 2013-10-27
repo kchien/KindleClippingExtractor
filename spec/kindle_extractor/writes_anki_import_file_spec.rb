@@ -1,4 +1,4 @@
-require 'writes_anki_import_file'
+require 'kindle_extractor/writes_anki_import_file'
 require 'fakefs/safe'
 require 'fakefs/spec_helpers'
 
