@@ -17,3 +17,7 @@ file and create files that you can import into [Anki](http://ankisrs.net/).
 ## TODO
 1. Add command line option to specify output directory
 2. Add command line option to specify date range 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kchien/kindleclippingextractor/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
