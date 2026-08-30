@@ -1,6 +1,6 @@
 Kindle Clipping Extractor
 =========================
-[![Build Status](https://travis-ci.org/kchien/KindleClippingExtractor.png?branch=master)](https://travis-ci.org/kchien/KindleClippingExtractor)
+[![CI](https://github.com/kchien/KindleClippingExtractor/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/kchien/KindleClippingExtractor/actions/workflows/ci.yml)
 [![Code Climate](https://codeclimate.com/github/kchien/KindleClippingExtractor.png)](https://codeclimate.com/github/kchien/KindleClippingExtractor)
 
 A quick script (in alpha status) that will read the Amazon Kindle clippings
