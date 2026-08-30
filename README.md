@@ -8,15 +8,17 @@ file and create files that you can import into [Anki](http://ankisrs.net/).
 
 ## Usage
 1. bundle install
-2.    ruby kindle_extractor.rb path_to_kindle_clippings_file
+2.    bundle exec kce path_to_kindle_clippings_file
+
+(or, once installed as a gem: `kce path_to_kindle_clippings_file`)
 
 ### Example:
-    ruby kindle_extractor.rb ~/MyClippings.txt
+    bundle exec kce ~/MyClippings.txt
+    bundle exec kce -o ~/anki_import ~/MyClippings.txt
 
 
 ## TODO
-1. Add command line option to specify output directory
-2. Add command line option to specify date range 
+1. Add command line option to specify date range
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kchien/kindleclippingextractor/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

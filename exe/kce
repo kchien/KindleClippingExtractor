@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require "optparse"
+require "kindle_extractor"
+
+options = { output_dir: nil }
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: kce [options] PATH_TO_CLIPPINGS_FILE"
+
+  opts.on("-o", "--output-dir DIR", "Directory to write Anki import files to (default: current directory)") do |dir|
+    options[:output_dir] = dir
+  end
+
+  opts.on("-h", "--help", "Show this help message") do
+    puts opts
+    exit
+  end
+end
+
+parser.parse!(ARGV)
+
+clippings_file = ARGV[0]
+
+if clippings_file.nil?
+  warn "Error: missing path to Kindle clippings file.\n\n"
+  warn parser
+  exit 1
+end
+
+file_parser = KindleExtractor::ParsesKindleClippingFile.new(clippings_file)
+file_writer = options[:output_dir] ?
+  KindleExtractor::WritesAnkiImportFile.new(options[:output_dir]) :
+  KindleExtractor::WritesAnkiImportFile.new
+
+KindleExtractor::MakeCards.new(file_parser, file_writer).make

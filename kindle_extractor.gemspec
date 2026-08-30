@@ -4,7 +4,7 @@ require 'kindle_extractor/version'
 
 Gem::Specification.new do |s|
   s.name = "kindle_extractor"
-  s.version = KindleExtractor::VERSION #0.1 #TODO Set to a constant such as KindleExtractor::VERSION
+  s.version = KindleExtractor::VERSION
   s.authors = ["Kenrick Chien"]
   s.email = ["ken ドット　chien　アット　gmail　ドット　com"]
   s.homepage = ""
@@ -18,11 +18,15 @@ Gem::Specification.new do |s|
   s.files = Dir["lib/**/*.rb"]
   s.test_files = Dir["spec/**/*_spec.rb"]
   s.require_paths = ["lib"]
+  s.bindir = "exe"
+  s.executables = Dir["exe/*"].map { |f| File.basename(f) }
 
-  s.add_runtime_dependency "kindleclippings", "~> 1.3.2"
+  s.required_ruby_version = ">= 3.2"
 
-  s.add_development_dependency "rspec", "~> 2.8.0"
-  s.add_development_dependency "fakefs"
+  s.add_runtime_dependency "kindleclippings", "~> 1.4"
+
+  s.add_development_dependency "rspec", "~> 3.13"
+  s.add_development_dependency "fakefs", "~> 3.2"
   s.add_development_dependency 'rake', "~> 0.9.2.2"
 end
 
