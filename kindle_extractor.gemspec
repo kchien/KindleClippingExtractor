@@ -6,8 +6,9 @@ Gem::Specification.new do |s|
   s.name = "kindle_extractor"
   s.version = KindleExtractor::VERSION
   s.authors = ["Kenrick Chien"]
-  s.email = ["ken ドット　chien　アット　gmail　ドット　com"]
-  s.homepage = ""
+  s.email = ["ken.chien@gmail.com"]
+  s.homepage = "https://github.com/kchien/KindleClippingExtractor"
+  s.license = "MIT"
   s.summary = %q{Extracts highlights from Kindle Clippings file, which can be imported into Anki}
   s.description = %q{
         Extracts highlights from Kindle Clippings file, which can be imported into Anki.
@@ -15,7 +16,7 @@ Gem::Specification.new do |s|
         One file per book title is output.
   }
 
-  s.files = Dir["lib/**/*.rb"]
+  s.files = Dir["lib/**/*.rb"] + ["README.md", "LICENSE"]
   s.test_files = Dir["spec/**/*_spec.rb"]
   s.require_paths = ["lib"]
   s.bindir = "exe"

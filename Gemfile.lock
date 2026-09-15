@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kindle_extractor (0.1)
+    kindle_extractor (0.2)
       kindleclippings (~> 1.4)
 
 GEM
