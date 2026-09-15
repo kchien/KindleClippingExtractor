@@ -1,15 +1,33 @@
 #!/usr/bin/env ruby
 
 require "optparse"
+require "date"
 require "kindle_extractor"
 
-options = { output_dir: nil }
+options = { output_dir: nil, from: nil, to: nil }
+
+def parse_date(value, flag)
+  Date.parse(value)
+rescue ArgumentError, TypeError
+  warn "Error: could not parse #{flag} date #{value.inspect}. Try a format like 2013-05-01."
+  exit 1
+end
 
 parser = OptionParser.new do |opts|
   opts.banner = "Usage: kce [options] PATH_TO_CLIPPINGS_FILE"
 
   opts.on("-o", "--output-dir DIR", "Directory to write Anki import files to (default: current directory)") do |dir|
     options[:output_dir] = dir
+  end
+
+  opts.on("-f", "--from DATE", "Only include highlights added on or after DATE (e.g. 2013-05-01)") do |date|
+    day = parse_date(date, "--from")
+    options[:from] = DateTime.new(day.year, day.month, day.day, 0, 0, 0)
+  end
+
+  opts.on("-t", "--to DATE", "Only include highlights added on or before DATE (inclusive)") do |date|
+    day = parse_date(date, "--to")
+    options[:to] = DateTime.new(day.year, day.month, day.day, 23, 59, 59)
   end
 
   opts.on("-h", "--help", "Show this help message") do
@@ -28,9 +46,15 @@ if clippings_file.nil?
   exit 1
 end
 
+if options[:from] && options[:to] && options[:from] > options[:to]
+  warn "Error: --from date is after --to date."
+  exit 1
+end
+
 file_parser = KindleExtractor::ParsesKindleClippingFile.new(clippings_file)
 file_writer = options[:output_dir] ?
   KindleExtractor::WritesAnkiImportFile.new(options[:output_dir]) :
   KindleExtractor::WritesAnkiImportFile.new
+date_filter = KindleExtractor::FiltersByDateRange.new(from: options[:from], to: options[:to])
 
-KindleExtractor::MakeCards.new(file_parser, file_writer).make
+KindleExtractor::MakeCards.new(file_parser, file_writer, date_filter).make

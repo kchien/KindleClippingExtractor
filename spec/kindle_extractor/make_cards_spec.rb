@@ -24,6 +24,20 @@ module KindleExtractor
 
     end
 
+    context "with a date filter" do
+      let(:kept) { double("kept highlight") }
+      let(:dropped) { double("dropped highlight") }
+      let(:date_filter) { double("date_filter") }
+
+      it "only writes out the highlights the filter selects" do
+        expect(file_parser).to receive(:lines).and_return([kept, dropped])
+        expect(date_filter).to receive(:select).with([kept, dropped]).and_return([kept])
+        expect(file_writer).to receive(:write_out).with(kept)
+
+        MakeCards.new(file_parser, file_writer, date_filter).make
+      end
+    end
+
     context "a file with 3 entries" do
       let(:entry) { double("highlight") }
 

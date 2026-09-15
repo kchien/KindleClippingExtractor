@@ -27,10 +27,13 @@ constructors (this is what makes the specs dependency-free — every collaborato
 1. `ParsesKindleClippingFile` (`lib/kindle_extractor/parses_kindle_clipping_file.rb`) —
    wraps the external `kindleclippings` gem. `#lines` returns only `highlights`;
    notes and bookmarks in the clippings file are silently dropped.
-2. `MakeCards` (`lib/kindle_extractor/make_cards.rb`) — the orchestrator. Pulls
-   `file_parser.lines` and hands each highlight to `file_writer.write_out`. Holds no
-   knowledge of files or formats.
-3. `WritesAnkiImportFile` (`lib/kindle_extractor/writes_anki_import_file.rb`) — formats
+2. `FiltersByDateRange` (`lib/kindle_extractor/filters_by_date_range.rb`) — optional
+   `--from`/`--to` narrowing. Either end may be nil (open range); with both nil it is a
+   pass-through and never touches the timestamps.
+3. `MakeCards` (`lib/kindle_extractor/make_cards.rb`) — the orchestrator. Pulls
+   `file_parser.lines`, runs it through the date filter, and hands each surviving
+   highlight to `file_writer.write_out`. Holds no knowledge of files or formats.
+4. `WritesAnkiImportFile` (`lib/kindle_extractor/writes_anki_import_file.rb`) — formats
    one highlight as `content<TAB>title|author|location` and appends it to
    `<output_dir>/<book_title>.txt`.
 
@@ -50,6 +53,11 @@ defines the contract the doubles in the specs mimic.
   `FakeFS::FileSystem.add` first.
 - `spec_helper.rb` sets `disable_monkey_patching!`, so use `RSpec.describe`, never bare
   `describe`. Order is random and seeded.
+- Date filtering is ours, not the `kindleclippings` gem's: `ClippingResult#highlights`
+  returns a plain `Array`, so the gem's `by_date` cannot be chained after it, and `by_date`
+  requires *both* ends of the range anyway.
+- A `Clipping` whose timestamp matched none of the gem's three date formats has
+  `added_on == nil`; such highlights are dropped whenever a range is active.
 - The gemspec globs `lib/**/*.rb` and `exe/*` at build time — a new file is picked up
   automatically, but only if it lives there.
 - `diff-lcs` stays on 1.x: `rspec-expectations` constrains it to `< 2.0`, so `bundle outdated`
